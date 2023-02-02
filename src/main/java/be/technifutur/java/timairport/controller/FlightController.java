@@ -56,14 +56,14 @@ public class FlightController {
     }
 
     @PatchMapping(value = "/{id:[0-9]+}/update", params = "departureTime")
-    public void updateDepartureTime(@PathVariable long id, @RequestParam LocalDateTime time) {
+    public void updateDepartureTime(@PathVariable long id, @RequestParam("departureTime") LocalDateTime time) {
 
         flightService.updateDepartureTime(id,time);
 
     }
 
     @PatchMapping(value = "/{id:[0-9]+}/update", params = "arrivalTime")
-    public void updateArrivalTime(@PathVariable long id, @RequestParam LocalDateTime time) {
+    public void updateArrivalTime(@PathVariable long id, @RequestParam("arrivalTime") LocalDateTime time) {
 
         flightService.updateArrivalTime(id,time);
 
