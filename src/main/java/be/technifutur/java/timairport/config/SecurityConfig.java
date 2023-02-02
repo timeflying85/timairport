@@ -8,6 +8,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -17,6 +19,12 @@ import java.util.List;
 @EnableWebSecurity
 //@EnableMethodSecurity
 public class SecurityConfig {
+
+
+    @Bean
+    public PasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -36,17 +44,18 @@ public class SecurityConfig {
         return http.build();
     }
 
-    public UserDetailsService userDetailsService(){
+    @Bean
+    public UserDetailsService userDetailsService( PasswordEncoder encoder ){
 
         List<UserDetails> users = List.of(
                 User.builder()
                         .username("user")
-                        .password("pass")
+                        .password(encoder.encode("pass"))
                         .roles("USER")
                         .build(),
                 User.builder()
                         .username("admin")
-                        .password("pass")
+                        .password(encoder.encode("pass"))
                         .roles("ADMIN","USER")
                         .build()
         );
