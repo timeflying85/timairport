@@ -10,8 +10,12 @@ import be.technifutur.java.timairport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
-    @Service
+
+@Service
     public class FlightServiceImpl implements FlightService {
         @Autowired
         private FlightRepository flightRepository;
@@ -97,10 +101,10 @@ import org.springframework.stereotype.Service;
             Flight flight = new Flight();
             flight.setDepartureTime(form.getDepartureTime());
             flight.setArrivalTime(form.getArrivalTime());
-            flight.setDepartureAirportId(
+            flight.setDeparture(
                     airportRepository.findById(form.getDepartureAirportId()).orElseThrow()
                     );
-            flight.setDestinationAirportId(
+            flight.setDestination(
                     airportRepository.findById(form.getArrivalAirportId()).orElseThrow()
                     );
             flight.setCaptain(
@@ -118,6 +122,57 @@ import org.springframework.stereotype.Service;
 
             FlightDTO.from(savedFlight);
         }
+
+
+        @Override
+        public FlightDTO getOne(long id) {
+
+            return flightRepository.findById(id)
+                    .map( FlightDTO::from )
+                    .orElseThrow( RessourceNotFoundException::new );
+
+        }
+
+        @Override
+        public List<FlightDTO> getAll(){
+
+            return flightRepository.findAll().stream().map( FlightDTO::from ).toList();
+
+        }
+
+        @Override
+        public void delete(long id) {
+
+            flightRepository.deleteById(id);
+
+        }
+
+
+        @Override
+        public void updateDepartureTime(long id, LocalDateTime time) {
+
+            if ( !flightRepository.existsById(id) ) {
+                throw new RessourceNotFoundException();
+            }
+
+            flightRepository.updateDepartureTime(id, time);
+
+        }
+
+        @Override
+        public void updateArrivalTime(long id, LocalDateTime time) {
+
+            if ( !flightRepository.existsById(id) ) {
+                throw new RessourceNotFoundException();
+            }
+
+            flightRepository.updateArrivalTime(id, time);
+
+        }
+
+
+
+
 
     }
 

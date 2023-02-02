@@ -158,8 +158,8 @@ public class DataInit implements InitializingBean {
         flight.setArrivalTime(LocalDateTime.of(2023, 1, 28, 12, 00));
         flight.setDepartureTime(LocalDateTime.of(2023, 1, 29, 06, 00));
         flight.setPlane(plane);
-        flight.setDestinationAirportId(airport);
-        flight.setDepartureAirportId(airport2);
+        flight.setDestination(airport);
+        flight.setDeparture(airport2);
         flight.setFirstOfficer(pilot);
         flight.setCaptain(pilot2);
 
@@ -170,8 +170,8 @@ public class DataInit implements InitializingBean {
         flight2.setArrivalTime(LocalDateTime.of(2023, 2, 12, 5, 30));
         flight2.setDepartureTime(LocalDateTime.of(2023, 2, 13, 1, 0));
         flight2.setPlane(plane2);
-        flight2.setDestinationAirportId(airport3);
-        flight2.setDepartureAirportId(airport);
+        flight2.setDestination(airport3);
+        flight2.setDeparture(airport);
         flight2.setFirstOfficer(pilot3);
         flight2.setCaptain(pilot);
 
