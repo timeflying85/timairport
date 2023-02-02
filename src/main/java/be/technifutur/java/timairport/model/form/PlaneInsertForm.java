@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Data
 public class PlaneInsertForm {
@@ -19,7 +20,7 @@ public class PlaneInsertForm {
     private String callSign;
 
     @NotNull
-    @DayInPast(minDays = 5)
+    @DayInPast(value = 7, unit = ChronoUnit.DAYS)
     private LocalDate registrationDate;
 
     @NotNull
