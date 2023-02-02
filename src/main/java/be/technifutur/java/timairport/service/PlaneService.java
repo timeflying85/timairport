@@ -12,7 +12,6 @@ public interface PlaneService {
 
     PlaneDTO getOne(long id);
 
-
     List<PlaneDTO> getAll();
 
     void updateCompany(long idPlane, long companyId);

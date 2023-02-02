@@ -64,7 +64,7 @@ public class PlaneController {
     }
 
 
-    @PatchMapping("/{id:[0-9]+}/update/both")
+    @PatchMapping(path = "/{id:[0-9]+}/update/both")
     public void update(@PathVariable long id, @RequestParam Map<String, String> params){
 
         Map<String, Object> mapValues = new HashMap<>();
