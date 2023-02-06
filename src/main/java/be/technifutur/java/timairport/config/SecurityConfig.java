@@ -71,13 +71,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests( (authorize) -> {
             authorize
+                    .requestMatchers( HttpMethod.POST, "/auth/register").anonymous()
                     // via lambda request
                     .requestMatchers(request -> request.getRequestURI().length() > 50).hasRole(("ADMIN"))
-                    // via HttpMethod
-                    .requestMatchers( HttpMethod.POST ).hasRole("ADMIN")
-                    .requestMatchers( HttpMethod.PUT ).hasRole("ADMIN")
-                    .requestMatchers( HttpMethod.PATCH ).hasRole("ADMIN")
-                    .requestMatchers( HttpMethod.DELETE ).hasRole("ADMIN")
                     // via mapping d'URI
                     .requestMatchers("plane/all").anonymous()
                     .requestMatchers("/plane/add").authenticated()
@@ -88,6 +84,11 @@ public class SecurityConfig {
                                     // .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                     .requestMatchers(HttpMethod.GET,"/flight/*")
                                     .permitAll()
+                    // via HttpMethod
+                    .requestMatchers( HttpMethod.POST ).hasRole("ADMIN")
+                    .requestMatchers( HttpMethod.PUT ).hasRole("ADMIN")
+                    .requestMatchers( HttpMethod.PATCH ).hasRole("ADMIN")
+                    .requestMatchers( HttpMethod.DELETE ).hasRole("ADMIN")
                     .anyRequest().permitAll();
         });
 

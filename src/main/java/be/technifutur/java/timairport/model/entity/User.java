@@ -24,16 +24,16 @@ public class User implements UserDetails {
     private long id;
 
     @Column( nullable = false, unique = true )
-    private String userName;
+    private String username;
 
     @Column( nullable = false )
     private String password;
 
     @Column( nullable = false )
-    private boolean enable = true;
+    private boolean enabled = true;
 
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles = new LinkedHashSet<>();
 
 
@@ -41,38 +41,34 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map (SimpleGrantedAuthority::new )
+                .map ( (role) -> new SimpleGrantedAuthority("ROLE_"+role) )
                 .toList();
     }
-
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
+//
+//
+//    @Override
+//    public String getPassword() {
+//        return null;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return null;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }

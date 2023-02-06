@@ -34,14 +34,11 @@ public class UserDetailsServiceImpl implements UserService {
     @Override
     public void register(RegistrationForm form) {
 
-        if ( form.getPassword().equals( form.getConfirmPswd() ) )
-            throw new FormValidationException("password and confirmPswd should be equal");
-
-        if ( userRepository.existsByUserName((form.getUsername())))
+        if ( userRepository.existsByUsername( ( form.getUsername() ) ) )
             throw new FormValidationException("this username already exists");
 
         User user = form.toEntity();
-        user.setPassword( encoder.encode(user.getPassword()) );
+        user.setPassword( encoder.encode( user.getPassword() ) );
 
         userRepository.save( user );
 

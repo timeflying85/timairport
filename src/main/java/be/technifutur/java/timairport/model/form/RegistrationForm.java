@@ -26,7 +26,7 @@ public class RegistrationForm {
     public User toEntity(){
 
         User user = new User();
-        user.setUserName( username );
+        user.setUsername( username );
         user.setPassword( password );
         user.setRoles( Set.of("USER") );
 
