@@ -1,4 +1,4 @@
-package be.technifutur.java.timairport.service;
+package be.technifutur.java.timairport.service.impl;
 
 import be.technifutur.java.timairport.exceptions.InvalidInputException;
 import be.technifutur.java.timairport.exceptions.NoPlaneAvailableException;
@@ -7,6 +7,7 @@ import be.technifutur.java.timairport.model.dto.FlightDTO;
 import be.technifutur.java.timairport.model.entity.*;
 import be.technifutur.java.timairport.model.form.FlightInsertForm;
 import be.technifutur.java.timairport.repository.*;
+import be.technifutur.java.timairport.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,7 +99,7 @@ import java.util.Map;
                     .orElseThrow(RessourceNotFoundException::new);
 
             // Enregistrer le nouveau vol dans la base de données
-            Flight flight = new Flight();
+            Flight flight = form.toEntity();
             flight.setDepartureTime(form.getDepartureTime());
             flight.setArrivalTime(form.getArrivalTime());
             flight.setDeparture(

@@ -95,25 +95,25 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public UserDetailsService userDetailsService( PasswordEncoder encoder ){
-
-        List<UserDetails> users = List.of(
-                User.builder()
-                        .username("user")
-                        .password(encoder.encode("pass"))
-                        .roles("USER")
-                        .build(),
-                User.builder()
-                        .username("admin")
-                        .password(encoder.encode("pass"))
-                        .roles("ADMIN","USER")
-                        .build()
-        );
-
-        return new InMemoryUserDetailsManager( users );
-
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService( PasswordEncoder encoder ){
+//
+//        List<UserDetails> users = List.of(
+//                User.builder()
+//                        .username("user")
+//                        .password(encoder.encode("pass"))
+//                        .roles("USER")
+//                        .build(),
+//                User.builder()
+//                        .username("admin")
+//                        .password(encoder.encode("pass"))
+//                        .roles("ADMIN","USER")
+//                        .build()
+//        );
+//
+//        return new InMemoryUserDetailsManager( users );
+//
+//    }
 
 }
 

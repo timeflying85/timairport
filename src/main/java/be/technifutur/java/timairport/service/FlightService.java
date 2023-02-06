@@ -4,7 +4,6 @@ import be.technifutur.java.timairport.model.dto.FlightDTO;
 import be.technifutur.java.timairport.model.form.FlightInsertForm;
 import jakarta.validation.Valid;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,4 +20,5 @@ public interface FlightService {
     void updateDepartureTime(long id, LocalDateTime time);
 
     void updateArrivalTime(long id, LocalDateTime time);
+
 }
