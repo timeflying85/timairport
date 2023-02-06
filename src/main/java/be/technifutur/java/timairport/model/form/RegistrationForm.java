@@ -18,11 +18,6 @@ public class RegistrationForm {
     @Size(min = 4)
     private String password;
 
-    @NotNull
-    @Size(min = 4)
-    private String confirmPswd;
-
-
     public User toEntity(){
 
         User user = new User();

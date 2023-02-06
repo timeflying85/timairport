@@ -10,3 +10,7 @@ spring:
       ddl-auto: create
       format_sql: true
 
+custom:
+  prop: "salut"
+  prop2: "YoMan"
+

@@ -30,7 +30,7 @@ public class JwtProvider {
         Date expiresAt = new Date( System.currentTimeMillis() + (24*60*60*1000));
 
         try {
-            JWT.create()
+            return JWT.create()
                     .withSubject( auth.getName() )
                     .withExpiresAt( expiresAt )
                     .withIssuedAt( issuedAt )
@@ -39,7 +39,6 @@ public class JwtProvider {
             throw new RuntimeException("Internal Error", e);
         }
 
-        return null;
 
     }
 

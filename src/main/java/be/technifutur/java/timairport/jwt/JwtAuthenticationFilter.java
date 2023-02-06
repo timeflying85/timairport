@@ -26,16 +26,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        String suffix = "Bearer";
+        String suffix = "Bearer ";
 
         String token;
 
-        if (authHeader != null && authHeader.startsWith(suffix) && jwtProvider.validateToken(token = authHeader.replace(suffix, ""))) {
+        if (
+                authHeader != null &&
+                authHeader.startsWith(suffix) &&
+                jwtProvider.validateToken(token = authHeader.replace(suffix, ""))
+        )
+        {
 
             Authentication auth = jwtProvider.generateAuth( token );
             SecurityContextHolder.getContext().setAuthentication( auth );
 
         }
+
+        filterChain.doFilter(request, response);
 
 
     }
