@@ -69,7 +69,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests( (authorize) -> {
             authorize
-                    .requestMatchers( HttpMethod.POST, "/auth/register").anonymous()
+                    .requestMatchers( HttpMethod.POST, "/auth/*").anonymous()
                     // via lambda request
                     .requestMatchers(request -> request.getRequestURI().length() > 50).hasRole(("ADMIN"))
                     // via mapping d'URI
