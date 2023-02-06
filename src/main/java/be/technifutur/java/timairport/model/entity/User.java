@@ -44,17 +44,7 @@ public class User implements UserDetails {
                 .map ( (role) -> new SimpleGrantedAuthority("ROLE_"+role) )
                 .toList();
     }
-//
-//
-//    @Override
-//    public String getPassword() {
-//        return null;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return null;
-//    }
+
 
     @Override
     public boolean isAccountNonExpired() {
