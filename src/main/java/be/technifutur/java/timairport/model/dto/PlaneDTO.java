@@ -2,7 +2,6 @@ package be.technifutur.java.timairport.model.dto;
 
 
 import be.technifutur.java.timairport.model.entity.Plane;
-import be.technifutur.java.timairport.model.entity.TypePlane;
 import lombok.Builder;
 import lombok.Data;
 

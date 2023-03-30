@@ -14,8 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table( name = "\"user\"" )
-@Getter
-@Setter
+@Getter @Setter
 public class User implements UserDetails {
 
     @Id

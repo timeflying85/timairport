@@ -2,7 +2,6 @@ package be.technifutur.java.timairport.model.form;
 
 
 import be.technifutur.java.timairport.model.entity.*;
-import com.fasterxml.jackson.annotation.JacksonInject;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

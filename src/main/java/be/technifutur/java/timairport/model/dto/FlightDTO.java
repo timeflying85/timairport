@@ -2,8 +2,8 @@ package be.technifutur.java.timairport.model.dto;
 
 
 import be.technifutur.java.timairport.model.entity.Airport;
+import be.technifutur.java.timairport.model.entity.Company;
 import be.technifutur.java.timairport.model.entity.Flight;
-import be.technifutur.java.timairport.model.entity.Pilot;
 import be.technifutur.java.timairport.model.entity.Plane;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +15,11 @@ import java.time.LocalDateTime;
 public class FlightDTO {
 
     private long id;
+    private CompanyDTO company;
     private AirportDTO departure;
     private AirportDTO destination;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
     private PilotDTO captain;
     private PilotDTO firstOfficer;
     private PlaneDTO plane;
@@ -35,7 +38,7 @@ public class FlightDTO {
             return AirportDTO.builder()
                     .id( entity.getId() )
                     .name(entity.getName())
-                    .location( String.format("%s,\n%s, %s", entity.getAddress(), entity.getCity(), entity.getCountry()) )
+                    .location( String.format("%s, %s", entity.getCity(), entity.getCountry()) )
                     .build();
         }
     }
@@ -70,7 +73,10 @@ public class FlightDTO {
                 .firstOfficer( PilotDTO.from(entity.getFirstOfficer() ) )
                 .departure( AirportDTO.from(entity.getDeparture() ) )
                 .destination( AirportDTO.from(entity.getDestination()) )
+                .departureTime(entity.getDepartureTime())
+                .arrivalTime( entity.getArrivalTime() )
                 .plane( PlaneDTO.from( entity.getPlane() ) )
+                .company( CompanyDTO.from(entity.getCompany()) )
                 .build();
 
     }

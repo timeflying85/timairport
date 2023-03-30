@@ -6,11 +6,13 @@ import be.technifutur.java.timairport.service.FlightService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("flight/")
 public class FlightController {
@@ -67,6 +69,22 @@ public class FlightController {
 
         flightService.updateArrivalTime(id,time);
 
+    }
+
+//    @PutMapping("/{id:[0-9]+}/update")
+//    public void updateFlight(@PathVariable long id, @RequestBody FlightInsertForm updatedFlight) {
+//        flightService.updateFlight(updatedFlight);
+//    }
+
+//    @PutMapping("/{id}/update")
+//    public ResponseEntity<FlightDTO> updateFlight(@PathVariable long id, @RequestBody FlightDTO flightDTO) {
+//        FlightDTO updatedFlight = flightService.updateFlight();
+//        return ResponseEntity.ok(updatedFlight);
+//    }
+
+    @PutMapping("/{id:[0-9]+}/update")
+    public FlightDTO updateFlight(@PathVariable long id, @RequestBody FlightDTO flightDTO) {
+        return flightService.updateFlight(id, flightDTO);
     }
 
 

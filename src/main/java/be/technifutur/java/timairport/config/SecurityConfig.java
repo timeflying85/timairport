@@ -1,6 +1,6 @@
 package be.technifutur.java.timairport.config;
 
-import be.technifutur.java.timairport.jwt.JwtAuthenticationFilter;
+import be.technifutur.java.timairport.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.List;
-
 @Configuration
 @EnableWebSecurity
 //@EnableMethodSecurity
@@ -28,7 +26,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
 
         http.csrf().disable();
 
@@ -83,8 +81,8 @@ public class SecurityConfig {
                     .requestMatchers("/plane/add").authenticated()
                     .requestMatchers("/plane/{id:[0-9]+}/update").hasRole("ADMIN") // ou .hasAuthority("ROLE_ADMIN")
                    // via HttpMethod + mapping d'URI
-                    .requestMatchers(HttpMethod.GET, "/plane/*")
-                                    .hasAnyRole("USER","ADMIN")
+//                    .requestMatchers(HttpMethod.GET, "/plane/*")
+//                                    .hasAnyRole("USER","ADMIN")
                                     // .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                     .requestMatchers(HttpMethod.GET,"/flight/*")
                                     .permitAll()

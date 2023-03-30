@@ -60,20 +60,30 @@ public class DataInit implements InitializingBean {
         List<TypePlane> types2 = List.of(type3);
         List<TypePlane> types3 = List.of(type2,type3);
 
+    // ------------------------------------------------------------------------------------- COMPANY
+
         Company company = new Company();
-        company.setName("Big money company");
+        company.setName("AirMan");
         company.setOriginCountry("USA");
 
         company = companyRepository.save(company);
 
         Company company2 = new Company();
-        company2.setName("Deedlamerd");
+        company2.setName("DreamSky");
         company2.setOriginCountry("Belgium");
 
         company2 = companyRepository.save(company2);
 
+        Company company3 = new Company();
+        company3.setName("GoSun");
+        company3.setOriginCountry("Spain");
+
+        company3 = companyRepository.save(company3);
+
+// ----------------------------------------------------------------- AIRPORT
+
         Airport airport = new Airport();
-        airport.setName("Pampano");
+        airport.setName("Pompano");
         airport.setCountry("USA");
         airport.setCity("Fort Lauderdale");
         airport.setPlaneParking(27);
@@ -82,7 +92,7 @@ public class DataInit implements InitializingBean {
         airport = airportRepository.save(airport);
 
         Airport airport2 = new Airport();
-        airport2.setName("vancity");
+        airport2.setName("Vancity");
         airport2.setCountry("Canada");
         airport2.setCity("Vancouver");
         airport2.setPlaneParking(12);
@@ -98,6 +108,44 @@ public class DataInit implements InitializingBean {
         airport3.setPlaneTypesAllowed(types);
 
         airport3 = airportRepository.save(airport3);
+
+        Airport airport4 = new Airport();
+        airport4.setName("IbiLand");
+        airport4.setCountry("Espagne");
+        airport4.setCity("Ibiza");
+        airport4.setPlaneParking(18);
+        airport4.setPlaneTypesAllowed(types);
+
+        airport4 = airportRepository.save(airport4);
+
+        Airport airport5 = new Airport();
+        airport5.setName("LalaLand");
+        airport5.setCountry("UK");
+        airport5.setCity("London");
+        airport5.setPlaneParking(12);
+        airport5.setPlaneTypesAllowed(types3);
+
+        airport5 = airportRepository.save(airport5);
+
+        Airport airport6 = new Airport();
+        airport6.setName("AmstFly");
+        airport6.setCountry("Pays-Bas");
+        airport6.setCity("Amsterdam");
+        airport6.setPlaneParking(32);
+        airport6.setPlaneTypesAllowed(types);
+
+        airport6 = airportRepository.save(airport6);
+
+        Airport airport7 = new Airport();
+        airport7.setName("AirBrux");
+        airport7.setCountry("Belgique");
+        airport7.setCity("Bruxelles");
+        airport7.setPlaneParking(40);
+        airport7.setPlaneTypesAllowed(types3);
+
+        airport7 = airportRepository.save(airport7);
+
+// ------------------------------------------------------------------------------------- PILOT
 
         Pilot pilot = new Pilot();
         pilot.setLicenseId("BEFCL0536A");
@@ -135,6 +183,20 @@ public class DataInit implements InitializingBean {
 
         pilot3 = pilotRepository.save(pilot3);
 
+        Pilot pilot4 = new Pilot();
+        pilot4.setLicenseId("FCL0589PL87");
+        pilot4.setCompany(company3);
+        pilot4.setLicenseAcquisition(LocalDate.from(LocalDateTime.of(2021,5,15,19,0)));
+        pilot4.setAddress("Blv de la régence 78, Holland");
+        pilot4.setEmail("myservices@hotmail.com");
+        pilot4.setFirstName("Vincent");
+        pilot4.setLastName("Leonard");
+        pilot4.setPhone("+4985765245");
+
+        pilot4 = pilotRepository.save(pilot4);
+
+    // ------------------------------------------------------------------------------------- PLANE
+
         Plane plane = new Plane();
         plane.setCallSign("F-GUVM");
         plane.setCompany(company);
@@ -146,36 +208,115 @@ public class DataInit implements InitializingBean {
 
         Plane plane2 = new Plane();
         plane2.setCallSign("F-HABM");
-        plane2.setCompany(company);
+        plane2.setCompany(company2);
         plane2.setRegistrationDate(LocalDate.of(2014,5,10));
         plane2.setInMaintenance(false);
         plane2.setType(type);
 
         plane2 = planeRepository.save(plane2);
 
+        Plane plane3 = new Plane();
+        plane3.setCallSign("F-GXNC");
+        plane3.setCompany(company3);
+        plane3.setRegistrationDate(LocalDate.of(2010,7,4));
+        plane3.setInMaintenance(false);
+        plane3.setType(type3);
+
+        plane3 = planeRepository.save(plane3);
+
+        Plane plane4 = new Plane();
+        plane4.setCallSign("N-121RO");
+        plane4.setCompany(company3);
+        plane4.setRegistrationDate(LocalDate.of(2018,2,1));
+        plane4.setInMaintenance(false);
+        plane4.setType(type2);
+
+        plane4 = planeRepository.save(plane4);
+
+        Plane plane5 = new Plane();
+        plane5.setCallSign("OO-1FFT");
+        plane5.setCompany(company2);
+        plane5.setRegistrationDate(LocalDate.of(2009,4,14));
+        plane5.setInMaintenance(false);
+        plane5.setType(type3);
+
+        plane5 = planeRepository.save(plane5);
+
+        Plane plane6 = new Plane();
+        plane6.setCallSign("OO-YLOP");
+        plane6.setCompany(company);
+        plane6.setRegistrationDate(LocalDate.of(2012,10,21));
+        plane6.setInMaintenance(false);
+        plane6.setType(type);
+
+        plane6 = planeRepository.save(plane6);
+
+    // ------------------------------------------------------------------------------------- FLIGHT
+
         Flight flight = new Flight();
         flight.setId(1);
-        flight.setArrivalTime(LocalDateTime.of(2023, 1, 28, 12, 00));
-        flight.setDepartureTime(LocalDateTime.of(2023, 1, 29, 06, 00));
+        flight.setArrivalTime(LocalDateTime.of(2023, 4, 28, 12, 00));
+        flight.setDepartureTime(LocalDateTime.of(2023, 4, 28, 06, 00));
         flight.setPlane(plane);
         flight.setDestination(airport);
         flight.setDeparture(airport2);
-        flight.setFirstOfficer(pilot);
+        flight.setFirstOfficer(pilot4);
         flight.setCaptain(pilot2);
+        flight.setCompany(company);
 
         flight = flightRepository.save(flight);
 
         Flight flight2 = new Flight();
         flight2.setId(2);
-        flight2.setArrivalTime(LocalDateTime.of(2023, 2, 12, 5, 30));
-        flight2.setDepartureTime(LocalDateTime.of(2023, 2, 13, 1, 0));
+        flight2.setArrivalTime(LocalDateTime.of(2023, 5, 13, 5, 30));
+        flight2.setDepartureTime(LocalDateTime.of(2023, 5, 12, 1, 0));
         flight2.setPlane(plane2);
         flight2.setDestination(airport3);
         flight2.setDeparture(airport);
         flight2.setFirstOfficer(pilot3);
         flight2.setCaptain(pilot);
+        flight.setCompany(company2);
 
         flight2 = flightRepository.save(flight2);
+
+        Flight flight3 = new Flight();
+        flight3.setId(3);
+        flight3.setArrivalTime(LocalDateTime.of(2023, 6, 27, 21, 0));
+        flight3.setDepartureTime(LocalDateTime.of(2023, 6, 28, 4, 0));
+        flight3.setPlane(plane3);
+        flight3.setDestination(airport5);
+        flight3.setDeparture(airport7);
+        flight3.setFirstOfficer(pilot2);
+        flight3.setCaptain(pilot3);
+        flight.setCompany(company3);
+
+        flight3 = flightRepository.save(flight3);
+
+        Flight flight4 = new Flight();
+        flight4.setId(4);
+        flight4.setArrivalTime(LocalDateTime.of(2023, 8, 15, 8, 0));
+        flight4.setDepartureTime(LocalDateTime.of(2023, 8, 15, 15, 0));
+        flight4.setPlane(plane5);
+        flight4.setDestination(airport6);
+        flight4.setDeparture(airport4);
+        flight4.setFirstOfficer(pilot4);
+        flight4.setCaptain(pilot);
+        flight.setCompany(company2);
+
+        flight4 = flightRepository.save(flight4);
+
+        Flight flight5 = new Flight();
+        flight5.setId(5);
+        flight5.setArrivalTime(LocalDateTime.of(2023, 12, 9, 13, 0));
+        flight5.setDepartureTime(LocalDateTime.of(2023, 12, 9, 22, 0));
+        flight5.setPlane(plane6);
+        flight5.setDestination(airport3);
+        flight5.setDeparture(airport2);
+        flight5.setFirstOfficer(pilot3);
+        flight5.setCaptain(pilot2);
+        flight.setCompany(company);
+
+        flight5 = flightRepository.save(flight5);
 
 
 

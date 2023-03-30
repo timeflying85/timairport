@@ -3,7 +3,10 @@ package be.technifutur.java.timairport.service.impl;
 import be.technifutur.java.timairport.exceptions.InvalidInputException;
 import be.technifutur.java.timairport.exceptions.NoPlaneAvailableException;
 import be.technifutur.java.timairport.exceptions.RessourceNotFoundException;
+import be.technifutur.java.timairport.model.dto.CompanyDTO;
 import be.technifutur.java.timairport.model.dto.FlightDTO;
+import be.technifutur.java.timairport.model.dto.PilotDTO;
+import be.technifutur.java.timairport.model.dto.PlaneDTO;
 import be.technifutur.java.timairport.model.entity.*;
 import be.technifutur.java.timairport.model.form.FlightInsertForm;
 import be.technifutur.java.timairport.repository.*;
@@ -13,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 
 @Service
@@ -35,6 +37,7 @@ import java.util.Map;
 
         @Autowired
         private AirportRepository airportRepository;
+
 
         @Override
         public void createFlight(FlightInsertForm form) {
@@ -171,10 +174,53 @@ import java.util.Map;
 
         }
 
+//   @Override
+//    public void updateFlight(Flight updatedFlight) {
+//
+//            if ( !flightRepository.existsById(updatedFlight.getId()) ) {
+//                throw new RessourceNotFoundException();
+//            }
+//
+//        flightRepository.save(updatedFlight);
+//
+//
+//
+//    }
 
+    public FlightDTO updateFlight(long id, FlightDTO flightDTO) {
+        Flight flight = flightRepository.findById(id)
+                .orElseThrow(RessourceNotFoundException::new);
 
+        // map values from DTO to entity
+        flight.setArrivalTime(flightDTO.getArrivalTime());
+        flight.setDepartureTime(flightDTO.getDepartureTime());
 
+        // save entity
+        Flight savedFlight = flightRepository.save(flight);
 
+        // map entity to DTO and return it
+        return FlightDTO.from(savedFlight);
     }
+
+//    @Override
+//    public FlightDTO updateFlight(long id, FlightDTO flightDTO) {
+//        Flight flight = flightRepository.existsById(id)
+//                .orElseThrow(() -> new RessourceNotFoundException());
+//
+//        flight.setDepartureTime(flightDTO.getDepartureTime());
+//        flight.setArrivalTime(flightDTO.getArrivalTime());
+//        flight.setDeparture(FlightDTO.AirportDTO.toEntity(flightDTO.getDeparture()));
+//        flight.setDestination(FlightDTO.AirportDTO.toEntity(flightDTO.getDestination()));
+//        flight.setCaptain(PilotDTO.toEntity(flightDTO.getCaptain()));
+//        flight.setFirstOfficer(PilotDTO.toEntity(flightDTO.getFirstOfficer()));
+//        flight.setPlane(PlaneDTO.toEntity(flightDTO.getPlane()));
+//        flight.setCompany(CompanyDTO.toEntity(flightDTO.getCompany()));
+//
+//        Flight savedFlight = flightRepository.save(flight);
+//        return FlightDTO.from(savedFlight);
+//    }
+
+
+}
 
 
